@@ -3,10 +3,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 }
-.services-title{
-    text-align: center;
-    color: blue;
-}
+
 
 
 /* make services responsive */
