@@ -1,9 +1,13 @@
 import React, { useRef } from 'react'
 import { Button, ButtonGroup, Form } from 'react-bootstrap'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import {
+	useSendPasswordResetEmail,
+	useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth'
 import auth from '../../../firebase.init'
 import SocialLogin from '../SocialLogin/SocialLogin'
+import { async } from '@firebase/util'
 
 const Login = () => {
 	const [signInWithEmailAndPassword, user, loading, error] =
@@ -18,12 +22,10 @@ const Login = () => {
 
 	let errorElement
 	if (error) {
-		errorElement = (
-			<div>
-				<p className='text-danger'>Error: {error?.message}</p>
-			</div>
-		)
+		errorElement = <p className='text-danger'>Error: {error?.message}</p>
 	}
+
+	const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth)
 
 	const handleSubmit = event => {
 		event.preventDefault()
@@ -36,6 +38,12 @@ const Login = () => {
 	const navigateRegister = event => {
 		navigate('/register')
 	}
+	const resetPassword = async () => {
+		const email = emailRef.current.value
+		await sendPasswordResetEmail(email)
+		alert('Sent email')
+	}
+
 	if (user) {
 		navigate(from, { replace: true })
 	}
@@ -61,11 +69,8 @@ const Login = () => {
 						required
 					/>
 				</Form.Group>
-				<Form.Group className='mb-3' controlId='formBasicCheckbox'>
-					<Form.Check type='checkbox' label='Check me out' />
-				</Form.Group>
-				<Button variant='primary' type='submit'>
-					Submit
+				<Button variant='primary w-50 mx-auto d-block mb-2' type='submit'>
+					Login
 				</Button>
 			</Form>
 			{errorElement}
@@ -73,10 +78,20 @@ const Login = () => {
 				New to Genius Car?{' '}
 				<Link
 					to={'/register'}
-					className='text-danger pe-auto text-decoration-none'
+					className='text-primary pe-auto text-decoration-none'
 					onClick={navigateRegister}
 				>
 					Please Register
+				</Link>
+			</p>
+			<p>
+				Forgot Password?
+				<Link
+					to={'/register'}
+					className='text-primary pe-auto text-decoration-none'
+					onClick={resetPassword}
+				>
+					Reset Password
 				</Link>
 			</p>
 			<SocialLogin></SocialLogin>
