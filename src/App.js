@@ -10,6 +10,7 @@ import Login from './Pages/Login/Login/Login'
 import Register from './Pages/Login/Register/Register'
 import Checkout from './Pages/Checkout/Checkout/Checkout'
 import RequireAuth from './Pages/Login/RequireAuth/RequireAuth'
+import AddService from './Pages/AddService/AddService'
 
 function App() {
 	return (
@@ -30,6 +31,14 @@ function App() {
 					element={
 						<RequireAuth>
 							<Checkout></Checkout>
+						</RequireAuth>
+					}
+				></Route>
+				<Route
+					path='/addservice'
+					element={
+						<RequireAuth>
+							<AddService></AddService>
 						</RequireAuth>
 					}
 				></Route>
