@@ -49,13 +49,28 @@ const Header = () => {
 								</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-						<Nav>
+						<Nav className='d-flex justify-content-center align-items-center'>
 							<Nav.Link as={Link} to='/about'>
 								About
 							</Nav.Link>
+							{user && (
+								<>
+									<Nav.Link as={Link} to='/addservice'>
+										Add
+									</Nav.Link>
+									<Nav.Link as={Link} to='/manage'>
+										Manage
+									</Nav.Link>
+								</>
+							)}
 							{user ? (
 								<Nav.Link as={Link} to='/login'>
-									<button onClick={handleSignOut}>Signout</button>
+									<button
+										className='btn btn-link text-white text-decoration-none'
+										onClick={handleSignOut}
+									>
+										Signout
+									</button>
 								</Nav.Link>
 							) : (
 								<Nav.Link as={Link} to='/login'>
