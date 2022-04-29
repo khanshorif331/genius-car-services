@@ -9,7 +9,7 @@ import auth from '../../../firebase.init'
 import SocialLogin from '../SocialLogin/SocialLogin'
 import { async } from '@firebase/util'
 import Loading from '../../Shared/Loading/Loading'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PageTitle from '../../Shared/PageTitle/PageTitle'
 
@@ -107,7 +107,6 @@ const Login = () => {
 				</button>
 			</p>
 			<SocialLogin></SocialLogin>
-			<ToastContainer></ToastContainer>
 		</div>
 	)
 }
